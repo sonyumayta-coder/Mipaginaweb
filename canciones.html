@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-[#0a0a0a] text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URBAN VIBES — Playlist</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Urbanist', 'sans-serif'],
+                    },
+                    colors: {
+                        urban: {
+                            dark: '#0a0a0a',
+                            card: '#141414',
+                            hover: '#1f1f1f',
+                            red: '#ff334b',
+                            redHover: '#e62e43',
+                            subtext: '#888888',
+                            border: '#262626'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="h-screen bg-urban-dark text-white font-sans antialiased overflow-hidden select-none flex flex-col">
+
+    <!-- Single HTML5 Audio Element -->
+    <audio id="main-audio" preload="metadata"></audio>
+
+    <!-- Main Workspace Container -->
+    <div class="flex flex-1 p-2 gap-2 min-h-0 overflow-hidden">
+        
+        <!-- SIDEBAR IZQUIERDA (Estilo Urbano) -->
+        <aside class="w-64 md:w-72 flex flex-col gap-2 flex-shrink-0 hidden md:flex">
+            
+            <!-- Box 1: Nav Principal -->
+            <div class="bg-urban-card border border-urban-border rounded-xl p-4 flex flex-col gap-4 shadow-xl">
+                <div class="flex items-center gap-3 text-white font-black text-xl px-2 tracking-wider">
+                    <div class="w-9 h-9 rounded-lg bg-urban-red flex items-center justify-center text-black shadow-lg shadow-urban-red/30">
+                        <i class="fa-solid fa-fire text-lg"></i>
+                    </div>
+                    <span>URBAN<span class="text-urban-red">Playlist</span></span>
+                </div>
+                <nav class="flex flex-col gap-1 mt-1 font-semibold text-sm">
+                    <a href="#" class="flex items-center gap-4 text-white bg-urban-hover/60 py-2.5 px-3 rounded-lg transition duration-200">
+                        <i class="fa-solid fa-bolt text-urban-red text-lg"></i>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-4 text-urban-subtext hover:text-white py-2.5 px-3 rounded-lg transition duration-200">
+                        <i class="fa-solid fa-compact-disc text-lg"></i>
+                        <span>Lanzamientos</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Box 2: Tu Biblioteca -->
+            <div class="bg-urban-card border border-urban-border rounded-xl p-4 flex-1 flex flex-col min-h-0 overflow-hidden shadow-xl">
+                <div class="flex items-center justify-between text-urban-subtext font-semibold text-sm pb-3 border-b border-urban-border">
+                    <button class="flex items-center gap-3 hover:text-white transition">
+                        <i class="fa-solid fa-layer-group text-lg"></i>
+                        <span>Tu Colección</span>
+                    </button>
+                    <button class="hover:bg-urban-hover p-1.5 rounded-lg text-lg hover:text-white transition" title="Crear">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <!-- Playlist Shortcuts -->
+                <div class="overflow-y-auto flex-1 space-y-1.5 pt-2 pr-1">
+                    <div class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-urban-hover cursor-pointer bg-urban-hover/40 border border-urban-border/50 group transition">
+                        <div class="w-12 h-12 bg-gradient-to-br from-urban-red to-black rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                            <i class="fa-solid fa-skull text-white text-base"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <h4 class="text-white font-bold text-sm truncate">Calle & Flow</h4>
+                            <p class="text-urban-subtext text-xs truncate">Playlist • 7 tracks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN PANEL / CONTENIDO PRINCIPAL -->
+        <main class="flex-1 bg-urban-card border border-urban-border rounded-xl flex flex-col min-w-0 overflow-hidden relative shadow-2xl">
+            
+            <!-- Sticky Header -->
+            <header class="h-16 bg-urban-card/90 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-20 border-b border-urban-border">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <button class="w-8 h-8 rounded-lg bg-urban-hover flex items-center justify-center text-urban-subtext hover:text-white cursor-not-allowed">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button class="w-8 h-8 rounded-lg bg-urban-hover flex items-center justify-center text-urban-subtext hover:text-white cursor-not-allowed">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Search bar -->
+                    <div class="relative w-48 sm:w-64 md:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-urban-subtext text-sm"></i>
+                        <input type="text" id="search-input" placeholder="Buscar artista, tema..." 
+                               class="bg-urban-dark text-sm text-white placeholder-urban-subtext pl-10 pr-4 py-2 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-urban-red border border-urban-border">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button id="btn-edit-songs" class="bg-urban-red hover:bg-urban-redHover text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg shadow-urban-red/20 transition flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> <span class="hidden sm:inline">Configurar MP3</span>
+                    </button>
+                    <div class="w-9 h-9 bg-gradient-to-tr from-orange-500 to-urban-red text-white font-extrabold rounded-xl flex items-center justify-center text-sm shadow-md cursor-pointer hover:scale-105 transition">
+                        U
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+                
+                <!-- Playlist Banner Hero (Estilo Urbano/Oscuro) -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-end gap-6 bg-gradient-to-b from-urban-red/20 via-urban-card to-transparent p-6 -mx-4 sm:-mx-6 -mt-4 sm:-mt-6 border-b border-urban-border">
+                    <div class="w-40 h-40 sm:w-48 sm:h-48 bg-gradient-to-br from-neutral-900 via-neutral-800 to-black rounded-xl shadow-2xl flex-shrink-0 flex items-center justify-center relative group overflow-hidden border border-urban-border">
+                        <i class="fa-solid fa-microphone-lines text-6xl text-urban-red group-hover:scale-110 transition duration-300"></i>
+                    </div>
+                    
+                    <div class="flex flex-col gap-2">
+                        <span class="text-xs font-black uppercase tracking-widest text-urban-red bg-urban-red/10 px-2.5 py-1 rounded-md w-fit border border-urban-red/30">Edición Exclusiva</span>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase italic">URBAN FLOW</h1>
+                        <p class="text-sm text-urban-subtext mt-1">Los mejores temas de Canserbero, Paulo Londra, Maluma, Humbe, Myke Towers y más en alta calidad.</p>
+                        <div class="flex items-center gap-2 text-xs text-white font-semibold mt-2">
+                            <span class="text-urban-red">Reproductor SPA</span>
+                            <span>•</span>
+                            <span id="header-total-songs">7 tracks</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Action Controls Bar -->
+                <div class="flex items-center gap-6 pt-2">
+                    <button id="btn-hero-play" class="w-14 h-14 rounded-2xl bg-urban-red hover:bg-urban-redHover hover:scale-105 text-white flex items-center justify-center shadow-xl shadow-urban-red/30 transition duration-200">
+                        <i class="fa-solid fa-play text-xl translate-x-0.5" id="hero-play-icon"></i>
+                    </button>
+                    <button class="text-urban-subtext hover:text-white text-3xl transition">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <button class="text-urban-subtext hover:text-white text-2xl transition">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                </div>
+
+                <!-- Grid View -->
+                <section>
+                    <h2 class="text-xl font-black text-white mb-4 tracking-tight uppercase italic flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-urban-red"></span> Tracks Populares
+                    </h2>
+                    
+                    <div id="songs-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                        <!-- Rendered by JS -->
+                    </div>
+                </section>
+
+                <!-- Detailed Song Table list -->
+                <section class="pt-4 pb-6">
+                    <h2 class="text-xl font-black text-white mb-4 uppercase italic">Lista Completa</h2>
+                    <div class="w-full text-left">
+                        <div class="grid grid-cols-12 text-urban-subtext text-xs uppercase tracking-wider border-b border-urban-border pb-2 px-4 font-bold">
+                            <span class="col-span-1">#</span>
+                            <span class="col-span-6 sm:col-span-5">Track / Artista</span>
+                            <span class="col-span-4 hidden sm:block">Álbum</span>
+                            <span class="col-span-5 sm:col-span-2 text-right"><i class="fa-regular fa-clock"></i></span>
+                        </div>
+                        <div id="songs-table" class="mt-2 space-y-1.5">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- STICKY BOTTOM PLAYER BAR -->
+    <footer class="h-24 bg-urban-dark border-t border-urban-border px-4 flex items-center justify-between z-50 flex-shrink-0 shadow-2xl">
+        
+        <!-- Left Section -->
+        <div class="flex items-center gap-3 w-1/3 md:w-1/4 min-w-0">
+            <img id="player-thumb" src="" alt="Portada" class="w-14 h-14 rounded-xl object-cover flex-shrink-0 bg-urban-card border border-urban-border">
+            
+            <div class="min-w-0 flex-1">
+                <h4 id="player-title" class="text-sm font-bold text-white truncate cursor-pointer">Selecciona un track</h4>
+                <p id="player-artist" class="text-xs text-urban-subtext truncate cursor-pointer">Urban Vibes</p>
+            </div>
+
+            <button id="player-like-btn" class="text-urban-subtext hover:text-white p-1 transition flex-shrink-0 hidden sm:block">
+                <i class="fa-regular fa-heart text-base"></i>
+            </button>
+        </div>
+
+        <!-- Center Controls -->
+        <div class="flex flex-col items-center gap-1.5 w-2/3 md:w-2/4 max-w-xl">
+            <div class="flex items-center gap-4 sm:gap-6">
+                <button id="btn-shuffle" class="text-urban-subtext hover:text-white text-sm transition" title="Aleatorio">
+                    <i class="fa-solid fa-shuffle"></i>
+                </button>
+                <button id="btn-prev" class="text-urban-subtext hover:text-white text-base transition active:scale-95" title="Anterior">
+                    <i class="fa-solid fa-backward-step"></i>
+                </button>
+                <button id="btn-play-pause" class="w-10 h-10 rounded-full bg-white text-urban-dark hover:scale-105 flex items-center justify-center transition shadow-lg active:scale-95" title="Play">
+                    <i class="fa-solid fa-play text-sm translate-x-0.5" id="sticky-play-icon"></i>
+                </button>
+                <button id="btn-next" class="text-urban-subtext hover:text-white text-base transition active:scale-95" title="Siguiente">
+                    <i class="fa-solid fa-forward-step"></i>
+                </button>
+                <button id="btn-repeat" class="text-urban-subtext hover:text-white text-sm transition" title="Repetir">
+                    <i class="fa-solid fa-repeat"></i>
+                </button>
+            </div>
+
+            <!-- Seekbar -->
+            <div class="w-full flex items-center gap-2 text-xs text-urban-subtext font-mono group">
+                <span id="time-current" class="w-9 text-right">0:00</span>
+                <div class="flex-1 flex items-center">
+                    <input type="range" id="progress-bar" value="0" min="0" max="100" class="w-full">
+                </div>
+                <span id="time-total" class="w-9 text-left">0:00</span>
+            </div>
+        </div>
+
+        <!-- Right Volume & Equalizer -->
+        <div class="flex items-center justify-end gap-3 w-1/4 hidden md:flex">
+            <div id="sticky-eq" class="flex items-end gap-0.5 h-4 opacity-0 transition duration-300 mr-2">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+            </div>
+
+            <div class="flex items-center gap-2 group w-28 md:w-32">
+                <button id="btn-mute" class="text-urban-subtext hover:text-white text-sm transition">
+                    <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+                </button>
+                <input type="range" id="volume-bar" value="80" min="0" max="100" class="w-full">
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL CONFIGURACIÓN -->
+    <div id="edit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-urban-card border border-urban-border rounded-2xl p-6 w-full max-w-2xl max-h-[85vh] flex flex-col gap-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-urban-border pb-3">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-music text-urban-red"></i> Rutas de Archivos MP3 Locales
+                </h3>
+                <button id="close-modal" class="text-urban-subtext hover:text-white text-xl">&times;</button>
+            </div>
+            
+            <p class="text-xs text-urban-subtext">Asegúrate de que tus archivos estén en la misma carpeta con sus nombres exactos (<code class="text-urban-red">1-stupid-love-story.mp3</code>, etc.).</p>
+
+            <div id="modal-inputs-container" class="overflow-y-auto space-y-3 pr-2 flex-1">
+                <!-- Inputs dinámicos -->
+            </div>
+
+            <div class="flex justify-end gap-3 border-t border-urban-border pt-3">
+                <button id="btn-cancel-modal" class="px-4 py-2 text-sm text-urban-subtext hover:text-white">Cancelar</button>
+                <button id="btn-save-modal" class="px-5 py-2 text-sm font-bold bg-urban-red hover:bg-urban-redHover text-white rounded-xl shadow-lg shadow-urban-red/30">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Vinculado -->
+    <script src="script.js"></script>
+</body>
+</html>

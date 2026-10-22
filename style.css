@@ -1,0 +1,73 @@
+/* Scrollbar Estilo Urbano Neón */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ff334b;
+}
+
+/* Range Sliders personalizados */
+input[type=range] {
+    -webkit-appearance: none;
+    background: transparent;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    background: #262626;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+.group:hover input[type=range]::-webkit-slider-runnable-track,
+input[type=range]:hover::-webkit-slider-runnable-track {
+    background: #ff334b;
+}
+input[type=range]::-webkit-slider-thumb {
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.group:hover input[type=range]::-webkit-slider-thumb,
+input[type=range]:hover::-webkit-slider-thumb,
+input[type=range]:active::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+/* Equalizer Animación */
+.eq-bar {
+    width: 3px;
+    background-color: #ff334b;
+    border-radius: 2px;
+    animation: urbanEq 1s infinite alternate;
+}
+.eq-bar:nth-child(1) { height: 40%; animation-delay: -0.2s; }
+.eq-bar:nth-child(2) { height: 100%; animation-delay: -0.4s; }
+.eq-bar:nth-child(3) { height: 60%; animation-delay: -0.1s; }
+.eq-bar:nth-child(4) { height: 80%; animation-delay: -0.5s; }
+
+@keyframes urbanEq {
+    0% { height: 20%; }
+    100% { height: 100%; }
+}
+
+.paused .eq-bar {
+    animation-play-state: paused;
+    height: 30% !important;
+}
